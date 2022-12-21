@@ -215,9 +215,9 @@ class FirstPaymentSubscriptionBuilderTest extends BaseTestCase
                 ->andReturn($payment);
         });
 
-        $response = $this->post(route('webhooks.mollie.first_payment', [
+        $response = $this->post(config('cashier.first_payment.webhook_url', route('webhooks.mollie.first_payment')), [
             'id' => 'tr_unique_payment_id',
-        ]));
+        ]);
 
         $response->assertStatus(200);
 

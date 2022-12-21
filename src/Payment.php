@@ -138,7 +138,7 @@ class Payment extends Model
         $newPayment = static::createFromMolliePayment($molliePayment, $owner, $actions);
 
         if ($newPayment->mollie_payment_status === PaymentStatus::STATUS_PAID) {
-            $molliePayment->webhookUrl = route('webhooks.mollie.aftercare');
+            $molliePayment->webhookUrl = config('cashier.aftercare_webhook_url', route('webhooks.mollie.aftercare'));
 
             /** @var UpdateMolliePayment $updateMolliePayment */
             $updateMolliePayment = app()->make(UpdateMolliePayment::class);
